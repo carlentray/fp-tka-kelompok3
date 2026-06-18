@@ -51,7 +51,7 @@ Kelompok kami mengimplementasikan arsitektur *3-tier* terdistribusi di lingkunga
 
 Berikut adalah diagram diagram topologi rancangan kami:
 
-![Placeholder untuk Diagram Topologi Cloud Kelompok 3](path/to/image_0.png)
+<img width="970" height="544" alt="image" src="https://github.com/user-attachments/assets/cb32dfcc-2e37-4875-ad8a-eacda78fc6d0" />
 
 Diagram di atas menunjukkan aliran data dari Internet (melalui port 80 ke Nginx), diteruskan ke Application Tier (melalui port 5000), dan akhirnya berinteraksi dengan Database Tier (melalui port 27017).
 
@@ -78,7 +78,7 @@ Seluruh kode sumber dan *script* otomasi *deployment* dapat ditemukan pada *repo
 2.  Data awal di-*restore* menggunakan *script* `generate_dump.py` atau `mongorestore` dari folder `resources/DB/dump`.
 3.  Tangkapan layar di bawah menunjukkan proses pembersihan database menggunakan *script* `cleanup.sh` yang dijalankan dari jarak jauh untuk memastikan validitas pengujian beban.
 
-![Placeholder untuk Screenshot VM 4 htop saat Cleanup](path/to/image_cleanup_db.png)
+<placeholder>
 
 ### Konfigurasi Application Server (VM 2 dan VM 3)
 
@@ -87,7 +87,9 @@ Seluruh kode sumber dan *script* otomasi *deployment* dapat ditemukan pada *repo
 3.  Variabel lingkungan dikonfigurasi agar aplikasi terhubung ke IP VM 4 (Database).
 4.  Berikut adalah tampilan `htop` pada VM Backend 1 (VM 2) yang menunjukkan beban kerja proses Python/Gunicorn saat menahan beban tinggi.
 
-![Placeholder untuk Screenshot VM 2 htop saat Load Test](path/to/image_htop_backend.png)
+<img width="861" height="435" alt="skenario3 (5)" src="https://github.com/user-attachments/assets/c19dcfff-2202-4030-9002-1435cd65575e" />
+
+<img width="859" height="428" alt="skenario5 (5)" src="https://github.com/user-attachments/assets/ba7402f0-d1d6-4335-a18e-508298af135e" />
 
 ### Konfigurasi Web Server dan Load Balancer (VM 1)
 
@@ -96,7 +98,7 @@ Seluruh kode sumber dan *script* otomasi *deployment* dapat ditemukan pada *repo
 3.  Nginx juga dikonfigurasi sebagai Reverse Proxy dan Load Balancer. Bagian `upstream` diarahkan ke IP VM 2 dan VM 3 pada port 5000.
 4.  Berikut adalah tangkapan layar `htop` pada VM 1 yang menunjukkan utilisasi Nginx yang sangat rendah meskipun menangani ribuan *request*, membuktikan efisiensi Nginx sebagai *load balancer*.
 
-![Placeholder untuk Screenshot VM 1 htop saat Load Test](path/to/image_htop_nginx.png)
+<img width="861" height="435" alt="skenario3 (5)" src="https://github.com/user-attachments/assets/c19dcfff-2202-4030-9002-1435cd65575e" />
 
 ---
 
@@ -152,19 +154,27 @@ Berikut adalah rekapitulasi hasil pencarian *Peak Concurrency* kelompok kami:
 
 * **Skenario 2 (Spawn Rate 50):** Berhasil menahan beban **1000 User** tanpa kegagalan (0 Fails).
 
-![Placeholder untuk Screenshot Locust Skenario 2 1000 User 0 Fails](path/to/image_locust_scenario_2.png)
+<img width="849" height="385" alt="skenario2 (7)" src="https://github.com/user-attachments/assets/3ee843c5-e405-4bbd-9ec2-4b2bb8e06afa" />
+
+<img width="916" height="291" alt="skenario2 (9)" src="https://github.com/user-attachments/assets/ee7e0bf2-c3be-4bbd-823d-8fd6b2c65143" />
 
 * **Skenario 3 (Spawn Rate 100):** Berhasil menahan beban **2500 User** tanpa kegagalan (0 Fails).
 
-![Placeholder untuk Screenshot Locust Skenario 3 2500 User 0 Fails](path/to/image_locust_scenario_3.png)
+<img width="918" height="283" alt="skenario3 (12)" src="https://github.com/user-attachments/assets/8d81cb50-c905-40d9-b7b4-4dd21f70e2cb" />
+
+<img width="847" height="323" alt="skenario3 (10)" src="https://github.com/user-attachments/assets/b6271ffc-07b4-42fb-8486-c439901aec83" />
 
 * **Skenario 4 (Spawn Rate 200):** Berhasil menahan beban **4000 User** tanpa kegagalan (0 Fails).
 
-![Placeholder untuk Screenshot Locust Skenario 4 4000 User 0 Fails](path/to/image_locust_scenario_4.png)
+<img width="911" height="289" alt="skenario4 (6)" src="https://github.com/user-attachments/assets/d389e4e3-ae22-4765-bbcc-6c31d062331d" />
+
+<img width="848" height="333" alt="skenario4 (4)" src="https://github.com/user-attachments/assets/c2fe5455-6774-496c-aba6-ea430c634b65" />
 
 * **Skenario 5 (Spawn Rate 500 - Ekstrem):** Berhasil menahan beban **1500 User** tanpa kegagalan (0 Fails). Meskipun dicoba di angka 2000, 2500, dan 5000 User menghasilkan *error* jaringan (Error 0), server berhasil *recover* dan mencetak angka Meditasi RPS **145.82** di titik 1500 User.
 
-![Placeholder untuk Screenshot Locust Skenario 5 1500 User 0 Fails](path/to/image_locust_scenario_5.png)
+<img width="917" height="295" alt="skenario5 (6)" src="https://github.com/user-attachments/assets/5aa9c63f-6b82-44a4-bf76-7ece68f0bfd2" />
+
+<img width="854" height="337" alt="skenario5 (4)" src="https://github.com/user-attachments/assets/34901e1e-4fc9-4963-8be4-829f3375628e" />
 
 ---
 
