@@ -89,6 +89,7 @@ Seluruh kode sumber dan *script* otomasi *deployment* dapat ditemukan pada *repo
 
 <img width="861" height="435" alt="skenario3 (5)" src="https://github.com/user-attachments/assets/c19dcfff-2202-4030-9002-1435cd65575e" />
 
+
 <img width="859" height="428" alt="skenario5 (5)" src="https://github.com/user-attachments/assets/ba7402f0-d1d6-4335-a18e-508298af135e" />
 
 ### Konfigurasi Web Server dan Load Balancer (VM 1)
@@ -156,11 +157,13 @@ Berikut adalah rekapitulasi hasil pencarian *Peak Concurrency* kelompok kami:
 
 <img width="849" height="385" alt="skenario2 (7)" src="https://github.com/user-attachments/assets/3ee843c5-e405-4bbd-9ec2-4b2bb8e06afa" />
 
+
 <img width="916" height="291" alt="skenario2 (9)" src="https://github.com/user-attachments/assets/ee7e0bf2-c3be-4bbd-823d-8fd6b2c65143" />
 
 * **Skenario 3 (Spawn Rate 100):** Berhasil menahan beban **2500 User** tanpa kegagalan (0 Fails).
 
 <img width="918" height="283" alt="skenario3 (12)" src="https://github.com/user-attachments/assets/8d81cb50-c905-40d9-b7b4-4dd21f70e2cb" />
+
 
 <img width="847" height="323" alt="skenario3 (10)" src="https://github.com/user-attachments/assets/b6271ffc-07b4-42fb-8486-c439901aec83" />
 
@@ -168,11 +171,13 @@ Berikut adalah rekapitulasi hasil pencarian *Peak Concurrency* kelompok kami:
 
 <img width="911" height="289" alt="skenario4 (6)" src="https://github.com/user-attachments/assets/d389e4e3-ae22-4765-bbcc-6c31d062331d" />
 
+
 <img width="848" height="333" alt="skenario4 (4)" src="https://github.com/user-attachments/assets/c2fe5455-6774-496c-aba6-ea430c634b65" />
 
 * **Skenario 5 (Spawn Rate 500 - Ekstrem):** Berhasil menahan beban **1500 User** tanpa kegagalan (0 Fails). Meskipun dicoba di angka 2000, 2500, dan 5000 User menghasilkan *error* jaringan (Error 0), server berhasil *recover* dan mencetak angka Meditasi RPS **145.82** di titik 1500 User.
 
 <img width="917" height="295" alt="skenario5 (6)" src="https://github.com/user-attachments/assets/5aa9c63f-6b82-44a4-bf76-7ece68f0bfd2" />
+
 
 <img width="854" height="337" alt="skenario5 (4)" src="https://github.com/user-attachments/assets/34901e1e-4fc9-4963-8be4-829f3375628e" />
 
