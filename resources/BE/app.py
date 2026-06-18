@@ -47,15 +47,27 @@ def get_order(order_id):
     doc["created_at"] = doc["created_at"].isoformat()
     return jsonify(doc)
 
-
 # 3. Get Order History
 @app.route("/orders", methods=["GET"])
 def get_orders():
-    docs = list(orders_col.find({}, {"_id": 0}).sort("created_at", DESCENDING))
-    for d in docs:
-        d["created_at"] = d["created_at"].isoformat()
-    return jsonify(docs)
+    # Mengambil dokumen tanpa mengubah _id yang di root level
+    docs = list(orders_col.find({}, {"_id": 0}).sort("created_at", DESCENDING).limit(100)) # Tambahkan limit biar gak ngelag narik 10k data!
 
+    # Fungsi pembantu untuk mengubah objek yang tidak disupport JSON menjadi string
+    def parse_json(data):
+        from bson import ObjectId
+        if isinstance(data, list):
+            return [parse_json(i) for i in data]
+        if isinstance(data, dict):
+            return {k: parse_json(v) for k, v in data.items()}
+        if isinstance(data, ObjectId):
+            return str(data)
+        if isinstance(data, datetime):
+            return data.isoformat()
+        return data
+
+    parsed_docs = parse_json(docs)
+    return jsonify(parsed_docs)
 
 # 4. Update Order Status
 @app.route("/order/<order_id>", methods=["PUT"])
