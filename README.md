@@ -111,19 +111,19 @@ Kami menguji keempat *endpoint* API utama menggunakan Postman untuk memastikan f
 
 * **POST /order:** Berhasil membuat pesanan baru (Status 201 Created).
 
-![Placeholder untuk Screenshot Postman POST order](path/to/image_postman_post.png)
+<img width="547" height="392" alt="endpoint 2" src="https://github.com/user-attachments/assets/4f75678d-62b4-40f4-89a5-024c72154a83" />
 
 * **GET /order/<id>:** Berhasil mengambil detail pesanan spesifik (Status 200 OK).
 
-![Placeholder untuk Screenshot Postman GET order id](path/to/image_postman_get_id.png)
+<img width="538" height="410" alt="endpoint 1" src="https://github.com/user-attachments/assets/797466ff-16b7-4f4d-a9fd-55a0d3f0f895" />
 
 * **GET /orders:** Berhasil mengambil riwayat seluruh pesanan (Status 200 OK).
 
-![Placeholder untuk Screenshot Postman GET orders](path/to/image_postman_get_all.png)
+<img width="534" height="416" alt="endpoint 4" src="https://github.com/user-attachments/assets/b8dcb803-85c7-4147-85a6-7e2b72afbff2" />
 
 * **PUT /order/<id>:** Berhasil memperbarui status pesanan (Status 200 OK).
 
-![Placeholder untuk Screenshot Postman PUT order id](path/to/image_postman_put.png)
+<img width="534" height="392" alt="endpoint 3" src="https://github.com/user-attachments/assets/c8d188d2-e84b-422e-a909-4a8b6de0fdae" />
 
 ### Tampilan Antarmuka Frontend
 
