@@ -1,0 +1,35 @@
+:80 {
+    log {
+        output stdout
+        format json
+    }
+
+    root * /srv/frontend
+    file_server
+
+    handle /order* {
+        reverse_proxy 10.104.0.3:5001 10.104.0.3:5002 10.104.0.6:5001 10.104.0.6:5002 {
+            lb_policy round_robin
+            lb_try_duration 5s
+            health_uri /health
+            health_interval 10s
+            health_timeout 3s
+        }
+    }
+
+    handle /orders* {
+        reverse_proxy 10.104.0.3:5001 10.104.0.3:5002 10.104.0.6:5001 10.104.0.6:5002 {
+            lb_policy round_robin
+            lb_try_duration 5s
+            health_uri /health
+            health_interval 10s
+            health_timeout 3s
+        }
+    }
+
+    handle /health {
+        reverse_proxy 10.104.0.3:5001 10.104.0.3:5002 10.104.0.6:5001 10.104.0.6:5002 {
+            lb_policy round_robin
+        }
+    }
+}

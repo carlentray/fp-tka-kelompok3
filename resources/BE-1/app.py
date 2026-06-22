@@ -1,22 +1,21 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 from pymongo import MongoClient, DESCENDING
 from datetime import datetime, timezone
 import uuid
 import os
 
 app = Flask(__name__)
+CORS(app)
 
 MONGO_URI = os.environ.get("MONGO_URI", "mongodb://localhost:27017/")
 client = MongoClient(MONGO_URI)
 db = client["orderdb"]
 orders_col = db["orders"]
 
-# Index untuk performa
 orders_col.create_index([("created_at", DESCENDING)])
-orders_col.create_index([("order_id", 1)])
+orders_col.create_index([("order_id", 1)], unique=True)
 
-
-# 1. Create Order
 @app.route("/order", methods=["POST"])
 def create_order():
     d = request.get_json() or {}
@@ -37,8 +36,6 @@ def create_order():
     order["created_at"] = order["created_at"].isoformat()
     return jsonify(order), 201
 
-
-# 2. Get Order Status
 @app.route("/order/<order_id>", methods=["GET"])
 def get_order(order_id):
     doc = orders_col.find_one({"order_id": order_id}, {"_id": 0})
@@ -47,29 +44,13 @@ def get_order(order_id):
     doc["created_at"] = doc["created_at"].isoformat()
     return jsonify(doc)
 
-# 3. Get Order History
 @app.route("/orders", methods=["GET"])
 def get_orders():
-    # Mengambil dokumen tanpa mengubah _id yang di root level
-    docs = list(orders_col.find({}, {"_id": 0}).sort("created_at", DESCENDING).limit(100)) # Tambahkan limit biar gak ngelag narik 10k data!
+    docs = list(orders_col.find({}, {"_id": 0}).sort("created_at", DESCENDING))
+    for d in docs:
+        d["created_at"] = d["created_at"].isoformat()
+    return jsonify(docs)
 
-    # Fungsi pembantu untuk mengubah objek yang tidak disupport JSON menjadi string
-    def parse_json(data):
-        from bson import ObjectId
-        if isinstance(data, list):
-            return [parse_json(i) for i in data]
-        if isinstance(data, dict):
-            return {k: parse_json(v) for k, v in data.items()}
-        if isinstance(data, ObjectId):
-            return str(data)
-        if isinstance(data, datetime):
-            return data.isoformat()
-        return data
-
-    parsed_docs = parse_json(docs)
-    return jsonify(parsed_docs)
-
-# 4. Update Order Status
 @app.route("/order/<order_id>", methods=["PUT"])
 def update_order(order_id):
     d = request.get_json() or {}
@@ -84,12 +65,9 @@ def update_order(order_id):
         return jsonify({"error": "Order not found"}), 404
     return jsonify({"order_id": order_id, "status": d["status"]})
 
-
-# Health check
 @app.route("/health", methods=["GET"])
 def health():
     return jsonify({"status": "ok"})
-
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=False)
